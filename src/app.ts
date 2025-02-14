@@ -1,6 +1,8 @@
-import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
+import db from './utils/database';
+import appRouter from './routes';
+import bodyParser from 'body-parser';
 
 class app {
    public server: express.Application;
@@ -10,12 +12,14 @@ class app {
       this.middlewares();
       this.routes();
    }
-   middlewares() {
-      this.server.use(express.json({limit:"16mb", strict: true}));
-      this.server.use(express.urlencoded({limit:"16mb", extended: true}));
+   async middlewares() {
+      const database = await db();
+      console.log(database);
       this.server.use(cors())
    }
    routes() {
+      this.server.use(bodyParser.json());
+      this.server.use(bodyParser.urlencoded());
       this.server.get('/', (req, res) => {
          res.status(200).json({
             meta: {
@@ -25,7 +29,7 @@ class app {
             data: "HI From Backend"
          })
       })
-      // this.server.use('/api');
+      this.server.use('/api', appRouter);
    }
 }
 
