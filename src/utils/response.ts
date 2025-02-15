@@ -29,7 +29,7 @@ export default {
    },
    error(res:Response, error:unknown, message?:string){
       if (error instanceof Yup.ValidationError) {
-         return res.status(400).json({
+         res.status(400).json({
             meta: {
                status: 400,
                message
