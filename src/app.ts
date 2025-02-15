@@ -17,6 +17,7 @@ class app {
       console.log(database);
       this.server.use(cors())
    }
+
    routes() {
       this.server.use(bodyParser.json());
       this.server.use(bodyParser.urlencoded());

@@ -27,3 +27,17 @@ export interface IUserToken extends Omit<IUser,
 export interface IReqUser extends Request {
    user?: IUserToken
 }
+
+export interface IProject {
+   name: string;
+   description: string;
+   createdAt: string;
+   updatedAt: string;
+   startTime: string;
+   endTime: string;
+   thumbnail: string;
+   previews: string[];
+   link: string;
+   githubLink: string;
+   stack: string[];
+}
